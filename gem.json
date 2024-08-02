@@ -1,0 +1,34 @@
+{
+    "gem_name": "Open3DE-ExtSimInt-Gem",
+    "version": "0.0.1",
+    "display_name": "External Simulation Integration",
+    "license": "License used i.e. Apache-2.0 or MIT",
+    "license_url": "Link to the license web site i.e. https://opensource.org/licenses/Apache-2.0",
+    "origin": "Anton Nedogarok",
+    "origin_url": "https://github.com/Ornstein89/Open3DE-ExtSimInt-Gem",
+    "type": "Code",
+    "summary": "Open3D engine Gem providing integration with external simulation model: video output to external model and motion input from external model",
+    "canonical_tags": [
+        "Gem"
+    ],
+    "user_tags": [
+        "External",
+        "Input",
+        "Output",
+        "Utility",
+        "IPC",
+        "InterProcessCommunication",
+        "Open3DE-ExtSimInt-Gem"
+    ],
+    "platforms": [
+        "Windows"
+    ],
+    "icon_path": "",
+    "requirements": "",
+    "documentation_url": "https://github.com/Ornstein89/Open3DE-ExtSimInt-Gem",
+    "dependencies": [],
+    "repo_uri": "https://github.com/Ornstein89/Open3DE-ExtSimInt-Gem",
+    "compatible_engines": [],
+    "engine_api_dependencies": [],
+    "restricted": "Open3DE-ExtSimInt-Gem"
+}

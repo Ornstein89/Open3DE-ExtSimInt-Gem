@@ -1,0 +1,18 @@
+{
+    "Amazon": {
+        "AssetProcessor": {
+            "Settings": {
+                "ScanFolder Open3DE-ExtSimInt-Gem/Assets": {
+                    "watch": "@GEMROOT:Open3DE-ExtSimInt-Gem@/Assets",
+                    "recursive": 1,
+                    "order": 101
+                },
+                "ScanFolder Open3DE-ExtSimInt-Gem/Registry": {
+                    "watch": "@GEMROOT:Open3DE-ExtSimInt-Gem@/Registry",
+                    "recursive": 1,
+                    "order": 102
+                }
+            }
+        }
+    }
+}
