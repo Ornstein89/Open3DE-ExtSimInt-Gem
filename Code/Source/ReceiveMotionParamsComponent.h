@@ -1,7 +1,12 @@
-
 #pragma once
 
 #include <AzCore/Component/Component.h>
+
+// #include <AzToolsFramework/ToolsComponents/EditorComponentBase.h>
+// #include <AzToolsFramework/ToolsComponents/EditorVisibilityBus.h>
+#include <AzFramework/Entity/EntityDebugDisplayBus.h>
+#include <AzCore/Component/TickBus.h>
+
 #include <Open3DE-ExtSimInt-Gem/ReceiveMotionParamsInterface.h>
 
 namespace Open3DE_ExtSimInt_Gem
@@ -12,15 +17,25 @@ namespace Open3DE_ExtSimInt_Gem
     */
 
     class ReceiveMotionParamsComponent
+        // : public AzToolsFramework::Components::EditorComponentBase
         : public AZ::Component
         , public ReceiveMotionParamsRequestBus::Handler
+        , public AZ::TickBus::Handler
+        , public AzFramework::EntityDebugDisplayEventBus::Handler
     {
     public:
         // AZ_COMPONENT_DECL(ReceiveMotionParamsComponent);
         AZ_COMPONENT(
             Open3DE_ExtSimInt_Gem::ReceiveMotionParamsComponent,
             "{866e509e-e1cc-4878-9898-98504c26677f}",
-            AZ::Component);
+            AZ::Component
+            );
+        // AZ_EDITOR_COMPONENT(
+        //     Open3DE_ExtSimInt_Gem::ReceiveMotionParamsComponent,
+        //     "{866e509e-e1cc-4878-9898-98504c26677f}",
+        //     // AZ::Component
+        //     AzToolsFramework::Components::EditorComponentBase
+        //     );    
 
         /*
         * Reflects component data into the reflection contexts, including the serialization, edit, and behavior contexts.
@@ -62,7 +77,15 @@ namespace Open3DE_ExtSimInt_Gem
         */
         static void GetDependentServices(AZ::ComponentDescriptor::DependencyArrayType& dependent);
 
+        void OnTick(float deltaTime, AZ::ScriptTimePoint time) override;
+        
+        
+
+        //INFO: https://docs.o3de.org/docs/user-guide/programming/components/editor-components/#sample-editor-component
+        void DisplayEntityViewport(const AzFramework::ViewportInfo& viewportInfo, AzFramework::DebugDisplayRequests& debugDisplay) override;
+
     protected:
+        // void DisplayEntity(bool& handled) override;
         /*
         * Puts this component into an active state.
         * The system calls this function once during activation of each entity that owns the
@@ -85,5 +108,7 @@ namespace Open3DE_ExtSimInt_Gem
         * Deactivate() implementation can handle this scenario.
         */
         void Deactivate() override;
+    private:
+        AZ::ScriptTimePoint m_time;
     };
 } // namespace Open3DE_ExtSimInt_Gem
