@@ -25,7 +25,23 @@ namespace Open3DE_ExtSimInt_Gem
 
         AzFramework::EntityDebugDisplayEventBus::Handler::BusConnect(GetEntityId());
 
-        
+        //TODO run thread
+        // m_socket = AZ::AzSocket::Socket(AF_INET, SOCK_STREAM, 0); //TCP
+        m_socket = AZ::AzSock::Socket(2 /*AF_INET*/, 2 /*SOCK_DGRAM*/, 17 /*IPPROTO_UDP*/); //TCP
+        if (m_socket != AZ_SOCKET_INVALID)
+        {
+            AZ::AzSock::AzSocketAddress address;
+            address.SetAddress("127.0.0.1", 45454);//TODO адрес и порт из GUI
+            int result = AZ::AzSock::Bind(m_socket, address);
+            if (result == 0)
+            {
+                AZ_Printf("ReceiveMotionParamsComponent", "Activate(): Connected to the server.\n");
+            }
+            else
+            {
+                AZ_Printf("ReceiveMotionParamsComponent", "Activate(): Failed to connect to the server.\n");
+            }
+        }
     }
 
     void ReceiveMotionParamsComponent::Deactivate()
@@ -34,6 +50,15 @@ namespace Open3DE_ExtSimInt_Gem
 
         AZ::TickBus::Handler::BusDisconnect();
         AzFramework::EntityDebugDisplayEventBus::Handler::BusDisconnect();
+
+        //TODO stop thread
+        if (m_socket != AZ_SOCKET_INVALID)
+        {
+            // AZ::AzSock::Shutdown(m_socket, AZ::AzSock::);
+            AZ::AzSock::CloseSocket(m_socket);
+            m_socket = AZ_SOCKET_INVALID;
+            AZ_Printf("ReceiveMotionParamsComponent", "Deactivate(): Socket closed.\n");
+        }
     }
 
     void ReceiveMotionParamsComponent::Reflect(AZ::ReflectContext *context)
@@ -84,11 +109,40 @@ namespace Open3DE_ExtSimInt_Gem
         // debugDisplay.SetColor(AZ::Colors::Red);
         // debugDisplay.Draw2dTextLabel(25.0f, 25.0f, 1.0f, "Hello, O3DE 25 25!");
         m_time = AZ::ScriptTimePoint(time.Get());
-        float phase = float(remainder((m_time.GetMilliseconds() / 1.0e+03f), 2.0 * M_PI)); 
-        AZ::Vector3 position(float(AZStd::sin(phase))*10.0f, float(AZStd::cos(phase))*10.0f, 100.0f);
-        // https://docs.o3de.org/docs/user-guide/programming/messaging/ebus/
-        // https://docs.o3de.org/docs/user-guide/components/reference/transform/
-        AZ::TransformBus::Event(GetEntityId(), &AZ::TransformBus::Events::SetWorldTranslation, position);
+        // float phase = float(remainder((m_time.GetMilliseconds() / 1.0e+03f), 2.0 * M_PI)); 
+
+
+        if (m_socket != AZ_SOCKET_INVALID)
+        {
+            char buffer[256] = { 0 };
+            int bytesReceived = 0;
+            bytesReceived = AZ::AzSock::Recv(m_socket, buffer, sizeof(buffer) - 1,  0/* MSG_PEEK */) ;
+            
+            if (bytesReceived > 0)
+            {
+                // AZ_Printf("ReceiveMotionParamsComponent", "OnTick(): Bytes received = %d\n", bytesReceived);
+                // AZ_Printf("ReceiveMotionParamsComponent", "Received data: %f, %f, %f\n",
+                // *reinterpret_cast<double*>(buffer),
+                // *reinterpret_cast<double*>(buffer+8),
+                // *reinterpret_cast<double*>(buffer+16));
+                
+                AZ::Vector3 position(
+                    static_cast<float>((*reinterpret_cast<double*>(buffer)))*10.0f,
+                    static_cast<float>((*reinterpret_cast<double*>(buffer+8)))*10.0f,
+                    static_cast<float>((*reinterpret_cast<double*>(buffer+16))));
+                AZ::TransformBus::Event(GetEntityId(), &AZ::TransformBus::Events::SetWorldTranslation, position);
+            }
+            else{
+                // AZ_Printf("ReceiveMotionParamsComponent", "OnTick(): Bytes received = 0\n")
+            }
+        }else{
+            AZ_Printf("ReceiveMotionParamsComponent", "OnTick(): AZ_SOCKET_INVALID\n")
+        }
+
+        // AZ::Vector3 position(float(AZStd::sin(phase))*10.0f, float(AZStd::cos(phase))*10.0f, 100.0f);
+        // // https://docs.o3de.org/docs/user-guide/programming/messaging/ebus/
+        // // https://docs.o3de.org/docs/user-guide/components/reference/transform/
+        // AZ::TransformBus::Event(GetEntityId(), &AZ::TransformBus::Events::SetWorldTranslation, position);
         return;
     }
 

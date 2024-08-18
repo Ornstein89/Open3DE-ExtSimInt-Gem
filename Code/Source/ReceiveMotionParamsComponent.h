@@ -6,7 +6,7 @@
 // #include <AzToolsFramework/ToolsComponents/EditorVisibilityBus.h>
 #include <AzFramework/Entity/EntityDebugDisplayBus.h>
 #include <AzCore/Component/TickBus.h>
-
+#include <AzCore/Socket/AzSocket.h>
 #include <Open3DE-ExtSimInt-Gem/ReceiveMotionParamsInterface.h>
 
 namespace Open3DE_ExtSimInt_Gem
@@ -110,5 +110,7 @@ namespace Open3DE_ExtSimInt_Gem
         void Deactivate() override;
     private:
         AZ::ScriptTimePoint m_time;
+        AZSOCKET m_socket;
+        AZStd::thread m_thread;
     };
 } // namespace Open3DE_ExtSimInt_Gem
