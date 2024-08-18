@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "translatestatevectorthread.h"
+#include "receivevideothread.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,5 +26,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    TranslateStatevectorThread * m_statevec_thread = nullptr;
+    ReceiveVideoThread * m_video_thread = nullptr;
 };
 #endif // MAINWINDOW_H
