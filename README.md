@@ -17,12 +17,18 @@ Open3D Engine gem providing interaction with external simulation model without R
 
 1. Create game project in O3DE Project manager on choose existing one.
 2. Open project menu and select `Configure Gems...`
-
-    ![configure_gems.png](/doc/img/configure_gems.png)
-
 3. Open top right menu, choose `Add Existing Gem` and find this gem repository folder. Then save changes.
 
-    ![add_gem.png](/doc/img/add_gem.png)
+    <table style="border: 0px solid black;padding : 2px;">
+        <tr style="border: 0px solid black;padding : 2px;">
+            <td style="border: 0px solid black;padding : 2px;">
+                <img src="/doc/img/configure_gems.png"/>
+            </td>
+            <td style="border: 0px solid black;padding : 2px;" rowspan="2">
+                <img src="/doc/img/add_gem.png"/>
+            </td>
+        </tr>
+    </table>
 
 4. Build project.
 
