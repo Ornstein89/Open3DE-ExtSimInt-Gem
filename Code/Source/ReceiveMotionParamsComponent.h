@@ -4,9 +4,11 @@
 
 // #include <AzToolsFramework/ToolsComponents/EditorComponentBase.h>
 // #include <AzToolsFramework/ToolsComponents/EditorVisibilityBus.h>
+
 #include <AzFramework/Entity/EntityDebugDisplayBus.h>
 #include <AzCore/Component/TickBus.h>
 #include <AzCore/Socket/AzSocket.h>
+// #include <AzCore/std/parallel/mutex.h> // atomic и mutex
 #include <Open3DE-ExtSimInt-Gem/ReceiveMotionParamsInterface.h>
 
 namespace Open3DE_ExtSimInt_Gem
@@ -109,8 +111,12 @@ namespace Open3DE_ExtSimInt_Gem
         */
         void Deactivate() override;
     private:
+        void ReadUDPSocket();
         AZ::ScriptTimePoint m_time;
-        AZSOCKET m_socket;
+        // AZSOCKET m_socket;
         AZStd::thread m_thread;
+        AZStd::mutex m_mutex;
+        bool m_running = false;
+        AZ::Vector3 m_xyz;
     };
 } // namespace Open3DE_ExtSimInt_Gem
