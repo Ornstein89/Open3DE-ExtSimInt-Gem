@@ -17,12 +17,18 @@ Open3D Engine gem providing interaction with external simulation model without R
 
 1. Create game project in O3DE Project manager on choose existing one.
 2. Open project menu and select `Configure Gems...`
-
-    ![configure_gems.png](/doc/img/configure_gems.png)
-
 3. Open top right menu, choose `Add Existing Gem` and find this gem repository folder. Then save changes.
 
-    ![add_gem.png](/doc/img/add_gem.png)
+    <table style="border: 0px solid black;padding : 2px;">
+        <tr style="border: 0px solid black;padding : 2px;">
+            <td style="border: 0px solid black;padding : 2px;">
+                <img src="/doc/img/configure_gems.png"/>
+            </td>
+            <td style="border: 0px solid black;padding : 2px;" rowspan="2">
+                <img src="/doc/img/add_gem.png"/>
+            </td>
+        </tr>
+    </table>
 
 4. Build project.
 
@@ -63,15 +69,17 @@ Open3D Engine gem providing interaction with external simulation model without R
         </tr>
     </table>
 
-    6.3. Build and launch `examples/minimal_app`, choose IPC method (yet only UDP) in combobox, press start.
+    6.3. Build and launch `examples/minimal_app`, choose IPC method (yet only `UDP`) in combobox, press start.
 
     6.4. Launch `Play Game` in O3DE Editor.
 
-    `TODO - demo video`
+    ![ReceiveMotionParams Demo](/doc/img/demo_RMP.gif)
+
+    (**Project, entities, level, assets are not included in this repo, used [copter 3D model](https://sketchfab.com/3d-models/dji-fpv-by-sdc-high-performance-drone-d471ea8c6235457b8e131842e2cf3783), terrain made by [tutorial1](https://docs.o3de.org/docs/learning-guide/tutorials/environments/create-terrain-from-images/) and [tutorial2](https://www.youtube.com/watch?v=rd8tEMUIEIY)**)
 
 7. To use `TranslatePictureComponent`
-
-   `TODO when ready`
+   **`In progress yet`**
+   **`TODO when ready`**
 
 ## Development guidelines
 

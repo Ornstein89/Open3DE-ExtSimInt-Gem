@@ -63,7 +63,7 @@ void TranslateStatevectorThread::run_udp()
                   *reinterpret_cast<double*>(data.data() + 16));
         qDebug() << buffer;
         udpsocket.writeDatagram(data, QHostAddress::LocalHost, 45454);
-        QThread::msleep(100);
+        QThread::msleep(10);
     }
 }
 
