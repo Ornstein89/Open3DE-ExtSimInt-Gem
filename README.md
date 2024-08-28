@@ -201,11 +201,10 @@ API documentation yet is very poor and formal. For this reason it's often requir
 
 ## TODO & current progress (dev branch)
 
-- [x] Created the gem and 2 components from templates, added them to interface, successfully built and added them to entity in a project.
-- [ ] 50% (UDP ready, shared memory yet `TODO`) External example app to translate motion parameters by IPC.
-- [ ] 50% (UDP ready, shared memory yet `TODO`) Receiving motion parameters by IPC from external app and moving entity (`ReceiveMotionParams` component).
-- [ ] Code to translate rendered picture by IPC  (`TranslatePicture` component).
-- [ ] External test app to receive and display picture from `TranslatePicture` component.
-- [ ] 50% Documentation
-- [ ] Reliability, usability, optimization.
-
+- [x] `ReceiveMotionParams` component + example external app, UDP.
+- [ ] `ReceiveMotionParams` component + example external app, shared memory.
+- [ ] `TranslatePicture` component: render viewport + display in external example app via UDP.
+- [ ] `TranslatePicture` component: render viewport + display in external example app via shared memory.
+- [ ] Add Editor GUI options to components.
+- [ ] 80% Documentation
+- [ ] Release: reliability, usability, optimization.
