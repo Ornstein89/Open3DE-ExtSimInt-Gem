@@ -4,6 +4,10 @@
 #include <AzCore/Component/Component.h>
 #include <Open3DE-ExtSimInt-Gem/TranslatePictureInterface.h>
 
+/* F1 → C/C++: Edit configurations (UI) → Include path → Add 
+ * C:/O3DE/23.10.3/Gems/Atom/RPI/Code/Include */
+#include <Atom/RPI.Public/ViewportContextBus.h>
+
 namespace Open3DE_ExtSimInt_Gem
 {
     /*

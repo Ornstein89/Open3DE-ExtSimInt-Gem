@@ -5,6 +5,8 @@
 #include <AzCore/Serialization/EditContext.h>
 #include <AzCore/RTTI/BehaviorContext.h>
 
+// TODO СМ. C:\O3DE\23.10.3\Gems\Atom\Tools\AtomToolsFramework\Code\Include\AtomToolsFramework\Viewport\ViewportInteractionImpl.h
+
 namespace Open3DE_ExtSimInt_Gem
 {
     // AZ_COMPONENT_IMPL(TranslatePictureComponent, "TranslatePictureComponent", "{F177E831-C499-4C7B-B509-1CFB42633519}");
